@@ -1,0 +1,12 @@
+<h2>List</h2>
+
+{{#each model as |book|}}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{book.title}}</h3>
+    </div>
+    <div class="panel-body">
+               <p>Author: {{book.author.name}}</p>
+        </div>
+  </div>
+{{/each}}
