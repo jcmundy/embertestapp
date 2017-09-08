@@ -7,9 +7,18 @@ export default Ember.Route.extend({
 
   actions: {
 
-    saveBooks(newLibrary) {
-      newLibrary.save().then(() => this.transitionTo('books'));
+    saveLibrary(newLibrary) {
+      newLibrary.save().then((savedLibrary) => {
+      savedLibrary.get('author').invoke('save');
+      });
     },
+  setupController: function (controller, model) {
+    this._super(controller, model);
+
+    controller.set('title', 'Create a new book');
+    controller.set('buttonLabel', 'Create');
+  },
+
 
     willTransition() {
       // rollbackAttributes() removes the record from the store

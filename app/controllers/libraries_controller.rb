@@ -46,6 +46,11 @@ class LibrariesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def library_params
-      params.require(:data).permit(:attributes =>[:name, :address, :phone])
+      ActiveModelSerializers::Deserialization
+          .jsonapi_parse(
+              params, only: [
+                  :name, :address, :phone
+                  ]
+                  )
     end
 end

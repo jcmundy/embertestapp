@@ -1,30 +1,33 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
 
 export default Ember.Route.extend({
 
   model() {
-   return Ember.RSVP.hash({
-   author: this.store.findAll('author'),
-   book: this.store.findAll('book')
-  });
+    return this.store.createRecord('author');
   },
-
-  setupController(controller, models) {
-    controller.set('author', models.author);
-    controller.set('book', models.book);
-  },
-
 
   actions: {
 
-    actionstime() {
-        var author = this.store.createRecord('author', {});
+    saveLibrary(author) {
+    const book = this.store.createRecord('book');
 
-        const newwork = author.get('books').createRecord({});
-        newwork.save().then((response) => {
-      this.controller.set('responseMessage', `Thank you! We've just saved your email address`);
-            });
+      author.save().then((book) => {
+      book.set('book', book);
+      book.save();
+      });
+    },
+  setupController: function (controller, model) {
+    this._super(controller, model);
+
+    controller.set('title', 'Create a new library');
+    controller.set('buttonLabel', 'Create');
+  },
+
+    willTransition() {
+      // rollbackAttributes() removes the record from the store
+      // if the model 'isNew'
+      this.controller.get('model').rollbackAttributes();
     }
   }
-
-});
+  });

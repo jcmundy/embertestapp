@@ -46,6 +46,11 @@ class InvitationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def invitation_params
-      params.require(:data).permit(:attributes => [:email])
+        ActiveModelSerializers::Deserialization
+          .jsonapi_parse(
+              params, only: [
+                  :email
+                  ]
+                  )
     end
 end

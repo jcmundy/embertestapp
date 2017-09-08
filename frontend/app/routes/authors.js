@@ -32,6 +32,15 @@ export default Ember.Route.extend({
 
       author.set('isEditing', false);
       author.save();
+    },
+    saveBook(book) {
+
+      if (book.get('isNotValid')) {
+        return;
+      }
+
+      book.set('isEditing', false);
+      book.save();
     }
   }
 
