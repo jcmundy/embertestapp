@@ -35,8 +35,15 @@ export default Ember.Route.extend({
     },
 
     saveBoth(author) {
+      author.set('isEditing', false);
       author.save().then((saveBook) => {
-      saveBook.get('book').invoke('save');
+      saveBook.get('book').invoke('save').then((savedBook) => {
+          console.log(savedBook)
+         }, (error) => {
+         console.log('save book error', error);
+         });
+      },(error) => {
+        console.log('save author error', error)
       }); }
   }
 });
