@@ -8,14 +8,16 @@ export default Ember.Route.extend({
   },
 
   actions: {
+    saveBoth: function() {
+      var new_author = this.get('controller.new_author');
+      var new_book = this.get('controller.new_book');
+      var new_authorrecord = this.store.createRecord('author', {
+      name: new_author});
+      var new_bookrecord = this.store.createRecord('book', {
+      title: new_book});
 
-    saveLibrary(author) {
-    const book = this.store.createRecord('book');
-
-      author.save().then((book) => {
-      book.set('book', book);
-      book.save();
-      });
+      new_authorrecord.save().then(() => {
+      new_bookrecord.save();});
     },
   setupController: function (controller, model) {
     this._super(controller, model);
@@ -24,10 +26,7 @@ export default Ember.Route.extend({
     controller.set('buttonLabel', 'Create');
   },
 
-    willTransition() {
-      // rollbackAttributes() removes the record from the store
-      // if the model 'isNew'
-      this.controller.get('model').rollbackAttributes();
-    }
+
   }
   });
+

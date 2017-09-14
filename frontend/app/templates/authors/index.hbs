@@ -1,7 +1,8 @@
 <h2>List</h2>
-
+<div class="row">
 {{#each model as |author|}}
-  <div class="panel panel-default">
+    <div class="col-md-4">
+      <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">{{author.name}}</h3>
     </div>
@@ -12,5 +13,5 @@
                <li>Book title: {{book.title}}</li>
              {{/each}}</ul>
         </div>
-  </div>
-{{/each}}
+  </div></div>
+{{/each}}</div>
