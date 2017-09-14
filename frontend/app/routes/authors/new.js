@@ -14,11 +14,11 @@ export default Ember.Route.extend({
       var new_authorrecord = this.store.createRecord('author', {
       name: new_author});
 
-      new_authorrecord.save().then((new_bookrecord) => {
-    new_bookrecord.get('books').addObject(this.store.createRecord('book', {
-      title: new_book}));
-      new_bookrecord.save();
-      this.transitionTo('books');
+      new_authorrecord.save().then(() => {
+    new_authorrecord.get('books').addObject(this.store.createRecord('book', {
+      title: new_book, author: new_author})).then((blue) => {
+      blue.save(); });
+
     });
     },
   setupController: function (controller, model) {
