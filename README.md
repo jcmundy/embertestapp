@@ -1,5 +1,8 @@
 # README
 
+# This Repo contains images for the ECDS OpenTour Builder Wiki!
+## Do not delete!
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
